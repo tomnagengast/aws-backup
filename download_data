@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+for bucket in $(aws s3 ls | awk '{print $3}')
+do
+   echo "Downloading $bucket..."
+   mkdir -p ./data/$bucket/
+   aws s3 sync s3://$bucket/ ./data/$bucket/
+done

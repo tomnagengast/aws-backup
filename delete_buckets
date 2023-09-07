@@ -1,0 +1,10 @@
+#! /usr/bin/env sh
+
+for bucket in $(aws s3 ls | awk '{print $3}')
+do
+   echo "Emptying $bucket..."
+   aws s3 rm s3://$bucket/ --recursive
+
+   echo "Deleting $bucket..."
+   aws s3 rb s3://$bucket
+done
